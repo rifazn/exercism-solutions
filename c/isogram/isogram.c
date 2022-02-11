@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include "isogram.h"
@@ -7,17 +6,18 @@ bool is_isogram(const char phrase[]) {
    if (phrase == NULL)
       return false;
 
-   bool alphabets[26];
+   bool alphabets[26] = {false};
+   int c, idx;
 
-   int i;
-   for (i = 0; i < 26; i++)
-      alphabets[i] = false;
+   while ((c = *phrase++) != '\0') {
 
-   for (i = 0; phrase[i] != '\0'; i++) {
-      if (!isalpha(phrase[i]))
+      if (c >= 'a' && c <= 'z')
+         idx = c - 'a';
+      else if (c >= 'A' && c <= 'Z')
+         idx = c - 'A';
+      else
          continue;
 
-      int idx = tolower(phrase[i]) - 'a';
 
       if (alphabets[idx] == true)
          return false;
